@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '/core/theme/app_colors.dart';
 
+typedef Validator = String? Function(String?);
+
 class CustomTextFormField extends StatefulWidget {
   final String hintText;
   final double? borderRadius;
@@ -11,6 +13,7 @@ class CustomTextFormField extends StatefulWidget {
   final bool isFilled;
   final Color? fillColor;
   final Widget? prefixIcon;
+  final Validator? validator;
 
   const CustomTextFormField({
     super.key,
@@ -23,6 +26,7 @@ class CustomTextFormField extends StatefulWidget {
     this.isFilled = false,
     this.fillColor,
     this.prefixIcon,
+    this.validator,
   });
 
   @override
@@ -31,12 +35,19 @@ class CustomTextFormField extends StatefulWidget {
 
 class _CustomTextFormFieldState extends State<CustomTextFormField> {
   bool visible = false;
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      style: Theme.of(context).textTheme.bodySmall!.copyWith(
+            color: AppColors.whiteColor,
+          ),
+      validator: widget.validator,
       controller: widget.controller,
       obscureText: (widget.isPassword) ? !visible : false,
       obscuringCharacter: "*",
+      cursorColor: AppColors.whiteColor,
+      cursorErrorColor: Colors.red,
       decoration: InputDecoration(
           filled: widget.isFilled,
           fillColor: widget.fillColor ?? AppColors.secondaryColor,
@@ -59,8 +70,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           focusedErrorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(widget.borderRadius ?? 12),
             borderSide: BorderSide(
-              color: widget.borderColor ??
-                  AppColors.secondaryColor.withOpacity(0.7),
+              color: widget.borderColor ?? Colors.red.withOpacity(0.7),
               width: 1.5,
             ),
           ),
@@ -83,7 +93,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           errorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(widget.borderRadius ?? 12),
             borderSide: BorderSide(
-              color: AppColors.secondaryColor.withOpacity(0.7),
+              color: Colors.red.withOpacity(0.7),
               width: 1.5,
             ),
           ),
