@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '/modules/create_account/create_account.dart';
 import '/core/routes/route_names.dart';
 import '/modules/login/login.dart';
 
@@ -10,6 +11,11 @@ abstract class Routes {
       case RouteNames.login:
         return MaterialPageRoute(
           builder: (context) => const Login(),
+          settings: setting,
+        );
+      case RouteNames.createAccount:
+        return MaterialPageRoute(
+          builder: (context) => const CreateAccount(),
           settings: setting,
         );
       default:

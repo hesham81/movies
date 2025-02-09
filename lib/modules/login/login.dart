@@ -1,6 +1,8 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:movies/core/routes/route_names.dart';
+import 'package:movies/core/services/bot_toast.dart';
 import 'package:movies/core/utils/firebase_auth_services.dart';
 import 'package:movies/core/validations/validations.dart';
 import '/core/constants/app_assets.dart';
@@ -41,7 +43,7 @@ class _LoginState extends State<Login> {
                 hintText: "Email",
                 controller: emailController,
                 validator: (value) {
-                  return Validations.isEmailValid(passwordController.text);
+                  return Validations.isEmailValid(emailController.text);
                 },
                 hintStyle: TextStyle(
                   fontFamily: "Roboto",
@@ -95,14 +97,16 @@ class _LoginState extends State<Login> {
                 ),
                 callBack: () async {
                   if (formKey.currentState!.validate()) {
+                    EasyLoading.show();
                     var response = await FirebaseAuthServices.login(
                       email: emailController.text,
                       password: passwordController.text,
                     );
+                    EasyLoading.dismiss();
                     if (response != null) {
-                      log("login Successful");
+                      BotToastServices.showSuccessMessage("Login Successfully");
                     } else {
-                      log("login failed");
+                      BotToastServices.showErrorMessage("There is an error");
                     }
                   }
                 },
@@ -117,6 +121,10 @@ class _LoginState extends State<Login> {
                   ),
                   CustomTextButton(
                     text: "Create One",
+                    callback: () => Navigator.pushReplacementNamed(
+                      context,
+                      RouteNames.createAccount,
+                    ),
                   ),
                 ],
               ),
