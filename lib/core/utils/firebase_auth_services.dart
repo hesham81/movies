@@ -60,4 +60,8 @@ abstract class FirebaseAuthServices {
   {
     return _firebase.currentUser;
   }
+  static signOut()
+  {
+    _firebase.signOut();
+  }
 }

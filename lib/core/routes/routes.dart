@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '/modules/layout/pages/profile/pages/edit_profile.dart';
 import '/modules/layout/pages/home/home.dart';
 import '/modules/forget_password/forget_password.dart';
 import '/modules/create_account/create_account.dart';
@@ -13,6 +14,11 @@ abstract class Routes {
       case RouteNames.login:
         return MaterialPageRoute(
           builder: (context) => const Login(),
+          settings: setting,
+        );
+      case RouteNames.editProfile:
+        return MaterialPageRoute(
+          builder: (context) => const EditProfile(),
           settings: setting,
         );
       case RouteNames.home:
@@ -30,6 +36,7 @@ abstract class Routes {
           builder: (context) => const CreateAccount(),
           settings: setting,
         );
+
       default:
         return MaterialPageRoute(
           builder: (context) => const Splash(),

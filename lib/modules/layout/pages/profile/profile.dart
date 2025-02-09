@@ -1,8 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:movies/core/extensions/extensions.dart';
+import 'package:movies/core/routes/route_names.dart';
 import 'package:movies/core/theme/app_colors.dart';
 import 'package:movies/core/widget/custom_elevated_button.dart';
+import 'package:movies/core/widget/load_network_image.dart';
 import 'package:movies/modules/layout/pages/profile/widget/tab_items.dart';
 
 import '/core/utils/firebase_auth_services.dart';
@@ -26,7 +29,6 @@ class _ProfileState extends State<Profile> {
           child: Column(
             children: [
               Container(
-                height: 0.4.height,
                 decoration: BoxDecoration(
                   color: AppColors.onyxGreen,
                 ),
@@ -35,111 +37,88 @@ class _ProfileState extends State<Profile> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Column(
-                            children: [
-                              Image.network(
-                                "${user!.photoURL}",
-                                height: 118,
-                                width: 118,
-                                fit: BoxFit.cover,
-                                loadingBuilder:
-                                    (context, child, loadingProgress) {
-                                  if (loadingProgress == null) {
-                                    return child;
-                                  }
-                                  return Center(
-                                    child: CircularProgressIndicator(
-                                      value:
-                                          loadingProgress.expectedTotalBytes !=
-                                                  null
-                                              ? loadingProgress
-                                                      .cumulativeBytesLoaded /
-                                                  (loadingProgress
-                                                          .expectedTotalBytes ??
-                                                      1)
-                                              : null,
-                                    ),
-                                  );
-                                },
-                                errorBuilder: (context, error, stackTrace) {
-                                  return Center(
-                                    child: Icon(
-                                      Icons.error,
-                                      color: Colors.red,
-                                      size: 50,
-                                    ),
-                                  );
-                                },
-                              ).allPadding(15),
-                              Text(
-                                "${user!.displayName}",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall!
-                                    .copyWith(
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 20,
-                                    ),
-                              ),
-                            ],
+                          Expanded(
+                            flex: 2,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                LoadNetworkImage(
+                                  url: "${user!.photoURL}",
+                                ).allPadding(15),
+                                Text(
+                                  "${user!.displayName}",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall!
+                                      .copyWith(
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 20,
+                                      ),
+                                ),
+                              ],
+                            ),
                           ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "12",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall!
-                                    .copyWith(
-                                      color: AppColors.whiteColor,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 24,
-                                    ),
-                              ),
-                              0.01.horSpace(),
-                              Text(
-                                "Wish List",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall!
-                                    .copyWith(
-                                      color: AppColors.whiteColor,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 24,
-                                    ),
-                              ),
-                            ],
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "12",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall!
+                                      .copyWith(
+                                        color: AppColors.whiteColor,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 24,
+                                      ),
+                                ),
+                                0.01.horSpace(),
+                                Text(
+                                  "Wish List",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall!
+                                      .copyWith(
+                                        color: AppColors.whiteColor,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 20,
+                                      ),
+                                ),
+                              ],
+                            ),
                           ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "10",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall!
-                                    .copyWith(
-                                      color: AppColors.whiteColor,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 24,
-                                    ),
-                              ),
-                              0.01.horSpace(),
-                              Text(
-                                "History",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall!
-                                    .copyWith(
-                                      color: AppColors.whiteColor,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 24,
-                                    ),
-                              ),
-                            ],
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "10",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall!
+                                      .copyWith(
+                                        color: AppColors.whiteColor,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 24,
+                                      ),
+                                ),
+                                0.01.horSpace(),
+                                Text(
+                                  "History",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall!
+                                      .copyWith(
+                                        color: AppColors.whiteColor,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 24,
+                                      ),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ).hPadding(0.03),
@@ -159,6 +138,12 @@ class _ProfileState extends State<Profile> {
                                     fontSize: 20,
                                     color: Colors.black,
                                   ),
+                              callBack: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  RouteNames.editProfile,
+                                );
+                              },
                               padding:
                                   EdgeInsets.symmetric(vertical: 0.015.height),
                             ).hPadding(0.02),
@@ -167,6 +152,16 @@ class _ProfileState extends State<Profile> {
                             flex: 2,
                             child: CustomElevatedButton(
                               text: "Exit",
+                              callBack: (){
+                                EasyLoading.show();
+                                FirebaseAuthServices.signOut();
+                                EasyLoading.dismiss();
+                                Navigator.pushNamedAndRemoveUntil(
+                                  context,
+                                  RouteNames.login,
+                                  (_) =>false ,
+                                );
+                              },
                               borderRadius: 15,
                               bgColor: Colors.red,
                               textStyle: Theme.of(context)
