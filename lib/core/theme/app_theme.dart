@@ -11,6 +11,14 @@ abstract class AppTheme {
         color: AppColors.secondaryColor,
       ),
     ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: Colors.transparent,
+      selectedItemColor: AppColors.secondaryColor,
+      unselectedItemColor: AppColors.whiteColor,
+      type: BottomNavigationBarType.fixed,
+      showSelectedLabels: false ,
+      showUnselectedLabels: false ,
+    ),
     textTheme: TextTheme(
       bodyMedium: TextStyle(
         color: AppColors.primaryColor,

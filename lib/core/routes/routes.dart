@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '/modules/layout/pages/home/home.dart';
 import '/modules/forget_password/forget_password.dart';
 import '/modules/create_account/create_account.dart';
 import '/core/routes/route_names.dart';
@@ -12,6 +13,11 @@ abstract class Routes {
       case RouteNames.login:
         return MaterialPageRoute(
           builder: (context) => const Login(),
+          settings: setting,
+        );
+      case RouteNames.home:
+        return MaterialPageRoute(
+          builder: (context) => const Home(),
           settings: setting,
         );
       case RouteNames.forgetPassword:

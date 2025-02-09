@@ -56,4 +56,8 @@ abstract class FirebaseAuthServices {
       print(error);
     }
   }
+  static getUserData()
+  {
+    return _firebase.currentUser;
+  }
 }

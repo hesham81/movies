@@ -108,6 +108,11 @@ class _LoginState extends State<Login> {
                     EasyLoading.dismiss();
                     if (response != null) {
                       BotToastServices.showSuccessMessage("Login Successfully");
+                      Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        RouteNames.home,
+                        (_) => false,
+                      );
                     } else {
                       BotToastServices.showErrorMessage("There is an error");
                     }
