@@ -8,7 +8,7 @@ abstract class AppTheme {
       centerTitle: true,
       backgroundColor: Colors.transparent,
       iconTheme: IconThemeData(
-        color: AppColors.primaryColor,
+        color: AppColors.secondaryColor,
       ),
     ),
     textTheme: TextTheme(
