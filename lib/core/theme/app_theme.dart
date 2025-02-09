@@ -8,8 +8,16 @@ abstract class AppTheme {
       centerTitle: true,
       backgroundColor: Colors.transparent,
       iconTheme: IconThemeData(
-        color: AppColors.primaryColor,
+        color: AppColors.secondaryColor,
       ),
+    ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: Colors.transparent,
+      selectedItemColor: AppColors.secondaryColor,
+      unselectedItemColor: AppColors.whiteColor,
+      type: BottomNavigationBarType.fixed,
+      showSelectedLabels: false ,
+      showUnselectedLabels: false ,
     ),
     textTheme: TextTheme(
       bodyMedium: TextStyle(

@@ -1,10 +1,9 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:movies/core/routes/route_names.dart';
-import 'package:movies/core/services/bot_toast.dart';
-import 'package:movies/core/utils/firebase_auth_services.dart';
-import 'package:movies/core/validations/validations.dart';
+import '/core/routes/route_names.dart';
+import '/core/services/bot_toast.dart';
+import '/core/utils/firebase_auth_services.dart';
+import '/core/validations/validations.dart';
 import '/core/constants/app_assets.dart';
 import '/core/extensions/extensions.dart';
 import '/core/theme/app_colors.dart';
@@ -87,6 +86,10 @@ class _LoginState extends State<Login> {
               ),
               CustomTextButton(
                 text: "Forget Password ?",
+                callback: () => Navigator.pushNamed(
+                  context,
+                  RouteNames.forgetPassword,
+                ),
               ).right,
               0.01.horSpace(),
               CustomElevatedButton(
@@ -105,6 +108,11 @@ class _LoginState extends State<Login> {
                     EasyLoading.dismiss();
                     if (response != null) {
                       BotToastServices.showSuccessMessage("Login Successfully");
+                      Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        RouteNames.home,
+                        (_) => false,
+                      );
                     } else {
                       BotToastServices.showErrorMessage("There is an error");
                     }

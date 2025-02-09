@@ -13,7 +13,7 @@ abstract class FirebaseAuthServices {
         password: password,
       );
       return user;
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (_) {
       return null;
     } catch (error) {
       return null;
@@ -39,11 +39,29 @@ abstract class FirebaseAuthServices {
         user.user!.refreshToken;
         return user.user;
       }
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (_) {
       print("object");
     } catch (error) {
       print("object");
     }
     return null;
+  }
+
+  static forgetPassword(String email) async {
+    try {
+      await _firebase.sendPasswordResetEmail(
+        email: email,
+      );
+    } catch (error) {
+      print(error);
+    }
+  }
+  static getUserData()
+  {
+    return _firebase.currentUser;
+  }
+  static signOut()
+  {
+    _firebase.signOut();
   }
 }

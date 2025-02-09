@@ -7,11 +7,10 @@ import 'package:movies/core/services/easy_loading.dart';
 import '/core/theme/app_theme.dart';
 import 'firebase_options.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp(
+  await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-
   );
   runApp(const MyApp());
 }
